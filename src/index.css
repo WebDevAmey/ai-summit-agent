@@ -95,8 +95,10 @@
   }
 
   .filter-pill {
-    @apply px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer select-none;
+    @apply px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer select-none;
     @apply bg-secondary text-muted-foreground hover:bg-secondary/80 hover:text-foreground;
+    @apply flex items-center justify-center;
+    min-height: 36px;
   }
 
   .filter-pill-active {

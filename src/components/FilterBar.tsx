@@ -57,35 +57,39 @@ export function FilterBar({
         </div>
 
         {/* Filter pills row */}
-        <div className="flex gap-2 overflow-x-auto scroll-hidden items-center pb-1 px-1">
+        <div className="flex gap-2 overflow-x-auto scroll-hidden items-center pb-1 -mx-4 px-4">
           {/* Day pills */}
-          {(Object.entries(DAY_LABELS) as [DayCode, string][]).map(([code, label]) => (
-            <button
-              key={code}
-              onClick={() => setSelectedDay(selectedDay === code ? null : code)}
-              className={`filter-pill whitespace-nowrap ${selectedDay === code ? 'filter-pill-active' : ''}`}
-            >
-              {label.split(', ')[0]}
-            </button>
-          ))}
+          <div className="flex gap-2 items-center flex-shrink-0">
+            {(Object.entries(DAY_LABELS) as [DayCode, string][]).map(([code, label]) => (
+              <button
+                key={code}
+                onClick={() => setSelectedDay(selectedDay === code ? null : code)}
+                className={`filter-pill whitespace-nowrap flex-shrink-0 ${selectedDay === code ? 'filter-pill-active' : ''}`}
+              >
+                {label.split(', ')[0]}
+              </button>
+            ))}
+          </div>
 
           <div className="w-px h-6 bg-border/50 mx-1 flex-shrink-0" />
 
           {/* Time slot pills */}
-          {TIME_SLOTS.map(slot => (
-            <button
-              key={slot}
-              onClick={() => setSelectedTimeSlot(selectedTimeSlot === slot ? null : slot)}
-              className={`filter-pill whitespace-nowrap ${selectedTimeSlot === slot ? 'filter-pill-active' : ''}`}
-            >
-              {slot}
-            </button>
-          ))}
+          <div className="flex gap-2 items-center flex-shrink-0">
+            {TIME_SLOTS.map(slot => (
+              <button
+                key={slot}
+                onClick={() => setSelectedTimeSlot(selectedTimeSlot === slot ? null : slot)}
+                className={`filter-pill whitespace-nowrap flex-shrink-0 ${selectedTimeSlot === slot ? 'filter-pill-active' : ''}`}
+              >
+                {slot}
+              </button>
+            ))}
+          </div>
 
           {hasFilters && (
             <>
               <div className="w-px h-6 bg-border/50 mx-1 flex-shrink-0" />
-              <button onClick={onClearAll} className="filter-pill text-primary hover:text-primary-foreground hover:bg-primary flex items-center gap-1 whitespace-nowrap">
+              <button onClick={onClearAll} className="filter-pill text-primary hover:text-primary-foreground hover:bg-primary flex items-center gap-1 whitespace-nowrap flex-shrink-0">
                 <X className="w-3 h-3" /> Clear all
               </button>
             </>

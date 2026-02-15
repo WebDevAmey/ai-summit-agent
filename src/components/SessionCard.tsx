@@ -12,6 +12,7 @@ interface SessionCardProps {
 
 export function SessionCard({ session, onOpenDetail, onAgendaChange }: SessionCardProps) {
   const [saved, setSaved] = useState(isSessionSaved(session.id));
+  const [justSaved, setJustSaved] = useState(false);
 
   const toggleSave = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -19,6 +20,8 @@ export function SessionCard({ session, onOpenDetail, onAgendaChange }: SessionCa
       removeSessionId(session.id);
     } else {
       saveSessionId(session.id);
+      setJustSaved(true);
+      setTimeout(() => setJustSaved(false), 300);
     }
     setSaved(!saved);
     onAgendaChange?.();
@@ -29,7 +32,9 @@ export function SessionCard({ session, onOpenDetail, onAgendaChange }: SessionCa
       layout
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass-card p-5 hover:border-primary/30 transition-all duration-200 cursor-pointer group"
+      className={`glass-card p-4 sm:p-5 hover:border-primary/30 transition-all duration-200 cursor-pointer group ${
+        saved ? 'border-primary/30 bg-primary/5' : ''
+      }`}
       onClick={() => onOpenDetail(session)}
     >
       <div className="flex justify-between items-start gap-2 sm:gap-3 mb-3">
@@ -38,14 +43,18 @@ export function SessionCard({ session, onOpenDetail, onAgendaChange }: SessionCa
         </h3>
         <button
           onClick={toggleSave}
-          className={`flex-shrink-0 p-1.5 rounded-lg transition-all ${
+          className={`flex-shrink-0 p-2 sm:p-1.5 rounded-lg transition-all active:scale-95 ${
             saved 
-              ? 'text-primary bg-primary/10' 
-              : 'text-muted-foreground hover:text-primary hover:bg-primary/10'
-          }`}
+              ? 'text-primary bg-primary/20 border border-primary/30' 
+              : 'text-muted-foreground hover:text-primary hover:bg-primary/10 border border-transparent'
+          } ${justSaved ? 'animate-pulse' : ''}`}
           aria-label={saved ? 'Remove from agenda' : 'Add to agenda'}
         >
-          {saved ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
+          {saved ? (
+            <BookmarkCheck className={`w-5 h-5 sm:w-4 sm:h-4 ${justSaved ? 'scale-125' : ''} transition-transform`} />
+          ) : (
+            <Bookmark className="w-5 h-5 sm:w-4 sm:h-4" />
+          )}
         </button>
       </div>
 

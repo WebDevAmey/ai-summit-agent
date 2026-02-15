@@ -58,15 +58,15 @@ export function SessionDrawer({ session, onClose }: SessionDrawerProps) {
           <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={toggleSave}
-              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-lg text-sm font-medium transition-all active:scale-95 ${
                 saved
-                  ? 'bg-primary text-primary-foreground'
+                  ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20'
                   : 'bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground'
               }`}
             >
-              {saved ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
+              {saved ? <BookmarkCheck className="w-5 h-5 sm:w-4 sm:h-4" /> : <Bookmark className="w-5 h-5 sm:w-4 sm:h-4" />}
               <span className="hidden sm:inline">{saved ? 'Saved to Agenda' : 'Add to My Agenda'}</span>
-              <span className="sm:hidden">{saved ? 'Saved' : 'Save'}</span>
+              <span className="sm:hidden font-semibold">{saved ? 'Saved' : 'Save'}</span>
             </button>
             {session.liveUrl && (
               <a

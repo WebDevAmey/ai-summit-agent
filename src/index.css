@@ -124,5 +124,21 @@
     * {
       -webkit-overflow-scrolling: touch;
     }
+    
+    /* Better tap highlight */
+    button:active {
+      opacity: 0.8;
+    }
+  }
+  
+  /* Bookmark animation */
+  @keyframes bookmark-save {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  
+  .bookmark-saved {
+    animation: bookmark-save 0.3s ease-out;
   }
 }

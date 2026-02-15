@@ -1,0 +1,75 @@
+/**
+ * Instructions for extracting sessions from browser console
+ * 
+ * Copy and paste this code into the browser console on https://india-ai-explorer.vercel.app/
+ */
+
+const browserExtractCode = `
+// Copy and paste this entire code block into the browser console
+// on https://india-ai-explorer.vercel.app/
+
+(async function extractSessions() {
+  console.log('Extracting sessions from page...');
+  
+  // Method 1: Try to find in React DevTools
+  const root = document.querySelector('#root');
+  
+  // Method 2: Check window objects
+  if (window.__NEXT_DATA__) {
+    const data = window.__NEXT_DATA__;
+    if (data.props?.pageProps?.sessions) {
+      console.log('Found in __NEXT_DATA__');
+      return data.props.pageProps.sessions;
+    }
+  }
+  
+  // Method 3: Try to access Vite/React internal state
+  // Look for the sessions import
+  const scripts = Array.from(document.querySelectorAll('script[type="module"]'));
+  for (const script of scripts) {
+    if (script.src && script.src.includes('index')) {
+      try {
+        const response = await fetch(script.src);
+        const text = await response.text();
+        if (text.includes('sessions') && text.includes('title')) {
+          // Try to extract the array
+          const match = text.match(/\\[\\s\\S]*?"title"[\\s\\S]*?\\]/);
+          if (match) {
+            console.log('Found in script bundle');
+            // This would need more parsing
+          }
+        }
+      } catch (e) {
+        // Continue
+      }
+    }
+  }
+  
+  // Method 4: Try to find the component that has sessions
+  // This requires React DevTools
+  console.log('If React DevTools is installed, inspect the root component');
+  console.log('Look for a component that has a "sessions" prop or state');
+  
+  return null;
+})();
+
+// Alternative: If you can access the source, look for:
+// - src/data/sessions.ts
+// - Any file importing from '@/data/sessions'
+`;
+
+console.log('Browser extraction code:');
+console.log(browserExtractCode);
+
+// Save to file for reference
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const outputPath = path.join(__dirname, 'browser-extract-instructions.txt');
+fs.writeFileSync(outputPath, browserExtractCode);
+console.log(`\n✅ Saved browser extraction instructions to: ${outputPath}`);
+

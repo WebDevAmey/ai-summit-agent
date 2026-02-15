@@ -1,0 +1,87 @@
+import { Session } from '@/lib/types';
+import { Calendar, Clock, MapPin, Users, Bookmark, BookmarkCheck, ExternalLink } from 'lucide-react';
+import { isSessionSaved, saveSessionId, removeSessionId } from '@/lib/agenda';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+interface SessionCardProps {
+  session: Session;
+  onOpenDetail: (session: Session) => void;
+  onAgendaChange?: () => void;
+}
+
+export function SessionCard({ session, onOpenDetail, onAgendaChange }: SessionCardProps) {
+  const [saved, setSaved] = useState(isSessionSaved(session.id));
+
+  const toggleSave = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (saved) {
+      removeSessionId(session.id);
+    } else {
+      saveSessionId(session.id);
+    }
+    setSaved(!saved);
+    onAgendaChange?.();
+  };
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="glass-card p-5 hover:border-primary/30 transition-all duration-200 cursor-pointer group"
+      onClick={() => onOpenDetail(session)}
+    >
+      <div className="flex justify-between items-start gap-3 mb-3">
+        <h3 className="text-base font-semibold text-foreground leading-tight group-hover:text-primary transition-colors font-sans">
+          {session.title}
+        </h3>
+        <button
+          onClick={toggleSave}
+          className={`flex-shrink-0 p-1.5 rounded-lg transition-all ${
+            saved 
+              ? 'text-primary bg-primary/10' 
+              : 'text-muted-foreground hover:text-primary hover:bg-primary/10'
+          }`}
+          aria-label={saved ? 'Remove from agenda' : 'Add to agenda'}
+        >
+          {saved ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
+        </button>
+      </div>
+
+      <div className="flex flex-wrap gap-3 text-xs text-muted-foreground mb-3">
+        <span className="flex items-center gap-1">
+          <Calendar className="w-3 h-3" /> {session.dateLabel}
+        </span>
+        <span className="flex items-center gap-1">
+          <Clock className="w-3 h-3" /> {session.startTime} – {session.endTime}
+        </span>
+        <span className="flex items-center gap-1">
+          <MapPin className="w-3 h-3" /> {session.room}
+        </span>
+      </div>
+
+      {session.speakers.length > 0 && (
+        <div className="flex items-center gap-1 text-xs text-muted-foreground mb-3">
+          <Users className="w-3 h-3 flex-shrink-0" />
+          <span className="truncate">{session.speakers.join(', ')}</span>
+        </div>
+      )}
+
+      <p className="text-xs text-muted-foreground/80 line-clamp-2 mb-3">{session.description}</p>
+
+      <div className="flex flex-wrap gap-1.5">
+        {session.topics.map(t => (
+          <span key={t} className="px-2 py-0.5 rounded-full bg-secondary text-[10px] font-medium text-secondary-foreground">
+            {t}
+          </span>
+        ))}
+        {session.liveUrl && (
+          <span className="px-2 py-0.5 rounded-full bg-primary/15 text-primary text-[10px] font-medium flex items-center gap-1">
+            <ExternalLink className="w-2.5 h-2.5" /> Live
+          </span>
+        )}
+      </div>
+    </motion.div>
+  );
+}

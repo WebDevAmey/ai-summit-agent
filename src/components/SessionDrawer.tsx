@@ -25,10 +25,18 @@ export function SessionDrawer({ session, onClose }: SessionDrawerProps) {
     return () => { document.body.style.overflow = ''; };
   }, [session]);
 
-  const toggleSave = () => {
-    if (saved) removeSessionId(session.id);
-    else saveSessionId(session.id);
-    setSaved(!saved);
+  const toggleSave = (e?: React.MouseEvent | React.TouchEvent) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+    if (saved) {
+      removeSessionId(session.id);
+      setSaved(false);
+    } else {
+      saveSessionId(session.id);
+      setSaved(true);
+    }
   };
 
   return (
@@ -81,6 +89,10 @@ export function SessionDrawer({ session, onClose }: SessionDrawerProps) {
           <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={toggleSave}
+              onTouchStart={(e) => {
+                e.stopPropagation();
+                toggleSave(e);
+              }}
               className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-lg text-sm font-medium transition-all active:scale-95 touch-manipulation ${
                 saved
                   ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20'

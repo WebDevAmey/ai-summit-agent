@@ -10,10 +10,8 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden py-20 md:py-32">
-      {/* Background effects */}
-      <div className="absolute inset-0 hero-gradient" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse-glow" />
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
+      {/* Transparent overlay to maintain hero gradient effect */}
+      <div className="absolute inset-0 hero-gradient opacity-30" />
       
       <div className="container relative z-10 mx-auto px-4">
         <motion.div 
@@ -48,15 +46,41 @@ export function Hero() {
               { label: 'Speakers', value: totalSpeakers },
               { label: 'Topics', value: totalTopics },
               { label: 'Days', value: 5 },
-            ].map((stat) => (
+            ].map((stat, index) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-center"
+                initial={{ opacity: 0, y: 30, scale: 0.5, rotate: -180 }}
+                animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
+                transition={{ 
+                  delay: 0.3 + index * 0.1,
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 15
+                }}
+                whileHover={{ 
+                  scale: 1.2, 
+                  rotate: [0, -10, 10, -10, 0],
+                  transition: { rotate: { duration: 0.5 } }
+                }}
+                className="text-center cursor-default"
               >
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-sans">{stat.value}</div>
+                <motion.div 
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-sans"
+                  animate={{
+                    textShadow: [
+                      "0 0 0px rgba(255, 107, 0, 0)",
+                      "0 0 20px rgba(255, 107, 0, 0.5)",
+                      "0 0 0px rgba(255, 107, 0, 0)"
+                    ]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: index * 0.3
+                  }}
+                >
+                  {stat.value}
+                </motion.div>
                 <div className="text-xs sm:text-sm text-muted-foreground mt-1">{stat.label}</div>
               </motion.div>
             ))}

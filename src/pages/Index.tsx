@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Hero } from '@/components/Hero';
 import { TopicGrid } from '@/components/TopicGrid';
 import { FilterBar } from '@/components/FilterBar';
@@ -37,7 +38,7 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen relative" style={{ zIndex: 1, background: 'transparent' }}>
       <Hero />
       <TopicGrid topics={topicStats} selectedTopics={selectedTopics} onToggleTopic={toggleTopic} />
       
@@ -56,23 +57,71 @@ const Index = () => {
       />
 
       <section className="container mx-auto px-4 py-6 sm:py-8">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {results.map(session => (
-            <SessionCard
-              key={session.id}
-              session={session}
-              onOpenDetail={setDetailSession}
-              onAgendaChange={() => setAgendaTick(t => t + 1)}
-            />
-          ))}
-        </div>
-        {results.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-2xl mb-2">🔍</p>
-            <p className="text-muted-foreground">No sessions match your filters.</p>
-            <button onClick={clearAll} className="text-primary text-sm mt-2 hover:underline">Clear all filters</button>
-          </div>
-        )}
+        <AnimatePresence mode="wait">
+          {results.length > 0 ? (
+            <motion.div 
+              className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {results.map((session, index) => (
+                <motion.div
+                  key={session.id}
+                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8, y: -20 }}
+                  transition={{ 
+                    delay: index * 0.05,
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 15
+                  }}
+                  layout
+                >
+                  <SessionCard
+                    session={session}
+                    onOpenDetail={setDetailSession}
+                    onAgendaChange={() => setAgendaTick(t => t + 1)}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div 
+              className="text-center py-20"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ type: "spring", stiffness: 200 }}
+            >
+              <motion.p 
+                className="text-2xl mb-2"
+                animate={{ 
+                  rotate: [0, 10, -10, 10, 0],
+                  scale: [1, 1.2, 1]
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatDelay: 1
+                }}
+              >
+                🔍
+              </motion.p>
+              <p className="text-muted-foreground">No sessions match your filters.</p>
+              <motion.button 
+                onClick={clearAll} 
+                className="text-primary text-sm mt-2 hover:underline"
+                whileHover={{ scale: 1.1, x: 5 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Clear all filters
+              </motion.button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
 
       <SessionDrawer session={detailSession} onClose={() => setDetailSession(null)} />

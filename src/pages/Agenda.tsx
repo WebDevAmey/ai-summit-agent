@@ -37,7 +37,7 @@ export default function AgendaPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen relative" style={{ zIndex: 1, background: 'transparent' }}>
       <div className="container mx-auto px-4 py-12">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 mb-8">
           <div>

@@ -18,7 +18,7 @@ export function SessionCard({ session, onOpenDetail, onAgendaChange }: SessionCa
     setSaved(isSessionSaved(session.id));
   }, [session.id]);
 
-  const toggleSave = (e: React.MouseEvent) => {
+  const toggleSave = (e: React.MouseEvent | React.TouchEvent) => {
     e.stopPropagation();
     e.preventDefault();
     if (saved) {
@@ -33,24 +33,58 @@ export function SessionCard({ session, onOpenDetail, onAgendaChange }: SessionCa
     onAgendaChange?.();
   };
 
+  // Handle touch events separately to prevent double-firing with onClick
+  const [touchHandled, setTouchHandled] = useState(false);
+  
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.stopPropagation();
+    const now = Date.now();
+    const lastToggle = (window as any).lastBookmarkToggle || 0;
+    // Prevent double-firing: only handle if not handled in last 300ms
+    if (now - lastToggle > 300) {
+      (window as any).lastBookmarkToggle = now;
+      setTouchHandled(true);
+      setTimeout(() => setTouchHandled(false), 300);
+      toggleSave(e);
+    }
+  };
+  
+  const handleClick = (e: React.MouseEvent) => {
+    // On mobile, if touch was handled, ignore click
+    if (touchHandled) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    toggleSave(e);
+  };
+
   return (
     <div
       className={`glass-card p-4 sm:p-5 hover:border-primary/30 cursor-pointer group transition-all ${
         saved ? 'border-primary/30 bg-primary/5' : ''
       }`}
       onClick={() => onOpenDetail(session)}
+      onTouchStart={(e) => {
+        // Prevent card click on touch if touching bookmark area
+        const target = e.target as HTMLElement;
+        if (target.closest('button')) {
+          return;
+        }
+      }}
     >
       <div className="flex justify-between items-start gap-2 sm:gap-3 mb-3">
         <h3 className="text-sm sm:text-base font-semibold text-foreground leading-tight group-hover:text-primary transition-colors font-sans flex-1 min-w-0">
           {session.title}
         </h3>
         <button
-          onClick={toggleSave}
-          onTouchStart={(e) => {
+          onClick={handleClick}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={(e) => {
+            e.preventDefault();
             e.stopPropagation();
-            toggleSave(e as any);
           }}
-          className={`flex-shrink-0 p-2 sm:p-1.5 rounded-lg transition-all active:scale-95 touch-manipulation ${
+          className={`flex-shrink-0 p-2 sm:p-1.5 rounded-lg transition-all active:scale-95 touch-manipulation z-20 relative ${
             saved 
               ? 'text-primary bg-primary/20 border border-primary/30' 
               : 'text-muted-foreground hover:text-primary hover:bg-primary/10 border border-transparent'

@@ -39,6 +39,32 @@ export function SessionDrawer({ session, onClose }: SessionDrawerProps) {
     }
   };
 
+  // Handle touch events separately to prevent double-firing with onClick
+  const [touchHandled, setTouchHandled] = useState(false);
+  
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.stopPropagation();
+    const now = Date.now();
+    const lastToggle = (window as any).lastBookmarkToggle || 0;
+    // Prevent double-firing: only handle if not handled in last 300ms
+    if (now - lastToggle > 300) {
+      (window as any).lastBookmarkToggle = now;
+      setTouchHandled(true);
+      setTimeout(() => setTouchHandled(false), 300);
+      toggleSave(e);
+    }
+  };
+  
+  const handleClick = (e: React.MouseEvent) => {
+    // On mobile, if touch was handled, ignore click
+    if (touchHandled) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    toggleSave(e);
+  };
+
   return (
     <AnimatePresence>
       {session && (
@@ -88,10 +114,11 @@ export function SessionDrawer({ session, onClose }: SessionDrawerProps) {
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-3">
             <button
-              onClick={toggleSave}
-              onTouchStart={(e) => {
+              onClick={handleClick}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={(e) => {
+                e.preventDefault();
                 e.stopPropagation();
-                toggleSave(e);
               }}
               className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-lg text-sm font-medium transition-all active:scale-95 touch-manipulation ${
                 saved

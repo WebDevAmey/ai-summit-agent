@@ -355,6 +355,13 @@
       opacity: 0.8;
     }
     
+    /* Prevent text selection on buttons */
+    button {
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: rgba(255, 107, 0, 0.2);
+    }
+    
     /* Better text alignment */
     .container {
       padding-left: 1rem;

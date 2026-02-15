@@ -38,9 +38,9 @@ export default function AgendaPage() {
 
   return (
     <div className="min-h-screen relative" style={{ zIndex: 1, background: 'transparent' }}>
-      <div className="container mx-auto px-4 py-12">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 mb-8">
-          <div>
+      <div className="container mx-auto px-4 py-6 sm:py-12">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
+          <div className="flex-1 min-w-0">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
               My <span className="text-gradient">Agenda</span>
             </h1>
@@ -49,9 +49,9 @@ export default function AgendaPage() {
           {sessions.length > 0 && (
             <button
               onClick={handleExport}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all w-full sm:w-auto justify-center"
+              className="flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all active:scale-95 touch-manipulation w-full sm:w-auto flex-shrink-0"
             >
-              <Download className="w-4 h-4" /> Export
+              <Download className="w-4 h-4 flex-shrink-0" /> <span>Export</span>
             </button>
           )}
         </div>
@@ -83,11 +83,18 @@ export default function AgendaPage() {
                           onAgendaChange={refresh}
                         />
                         <button
-                          onClick={() => handleRemove(session.id)}
-                          className="absolute top-2 right-12 p-1.5 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleRemove(session.id);
+                          }}
+                          onTouchStart={(e) => {
+                            e.stopPropagation();
+                            handleRemove(session.id);
+                          }}
+                          className="absolute top-2 right-12 sm:right-16 p-2 sm:p-1.5 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all active:scale-95 touch-manipulation z-10"
                           aria-label="Remove from agenda"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-4 h-4 sm:w-4 sm:h-4" />
                         </button>
                       </div>
                     ))}

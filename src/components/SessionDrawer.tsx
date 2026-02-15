@@ -35,7 +35,7 @@ export function SessionDrawer({ session, onClose }: SessionDrawerProps) {
     <AnimatePresence>
       {session && (
         <motion.div 
-          className="fixed inset-0 z-50 flex justify-end" 
+          className="fixed inset-0 z-[100] flex justify-end" 
           onClick={onClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -57,7 +57,7 @@ export function SessionDrawer({ session, onClose }: SessionDrawerProps) {
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
           <motion.div 
-            className="sticky top-0 z-10 flex items-center justify-between p-4 border-b border-border bg-card/80 backdrop-blur-md"
+            className="sticky top-0 z-[101] flex items-center justify-between p-4 border-b border-border bg-card/80 backdrop-blur-md"
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}

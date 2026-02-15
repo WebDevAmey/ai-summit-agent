@@ -22,11 +22,13 @@ export function Hero() {
           transition={{ duration: 0.8 }}
           className="text-center max-w-4xl mx-auto"
         >
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 sm:mb-8 text-xs sm:text-sm">
-            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary animate-pulse flex-shrink-0" />
-            <span className="font-medium text-primary whitespace-nowrap">Feb 16–20, 2026</span>
-            <span className="hidden sm:inline">•</span>
-            <span className="font-medium text-primary truncate max-w-[140px] sm:max-w-none">{VENUE}</span>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 sm:mb-8 text-xs sm:text-sm">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary animate-pulse flex-shrink-0" />
+              <span className="font-medium text-primary whitespace-nowrap">Feb 16–20, 2026</span>
+            </div>
+            <span className="hidden sm:inline text-primary/50">•</span>
+            <span className="font-medium text-primary text-center sm:text-left">{VENUE}</span>
           </div>
           
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 px-2">
@@ -40,7 +42,7 @@ export function Hero() {
           </p>
 
           {/* Stats strip */}
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-10 px-4">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-10 px-4 max-w-2xl mx-auto">
             {[
               { label: 'Sessions', value: totalSessions },
               { label: 'Speakers', value: totalSpeakers },

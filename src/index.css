@@ -129,6 +129,18 @@
     button:active {
       opacity: 0.8;
     }
+    
+    /* Better text alignment */
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    /* Prevent text overflow */
+    h1, h2, h3, p {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
   }
   
   /* Bookmark animation */

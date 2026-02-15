@@ -57,7 +57,7 @@ export function FilterBar({
         </div>
 
         {/* Filter pills row */}
-        <div className="flex gap-2 overflow-x-auto scroll-hidden items-center pb-1 -mx-1 px-1">
+        <div className="flex gap-2 overflow-x-auto scroll-hidden items-center pb-1 px-1">
           {/* Day pills */}
           {(Object.entries(DAY_LABELS) as [DayCode, string][]).map(([code, label]) => (
             <button
@@ -94,7 +94,7 @@ export function FilterBar({
 
         {/* Active topic chips + result count */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
-          <div className="flex gap-2 overflow-x-auto scroll-hidden w-full sm:w-auto pb-1 -mx-1 px-1">
+          <div className="flex gap-2 overflow-x-auto scroll-hidden w-full sm:w-auto pb-1 px-1">
             {selectedTopics.map(t => (
               <span key={t} className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-medium whitespace-nowrap">
                 {t}

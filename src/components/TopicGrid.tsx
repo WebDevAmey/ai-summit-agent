@@ -25,7 +25,7 @@ export function TopicGrid({ topics, selectedTopics, onToggleTopic }: TopicGridPr
                 transition={{ delay: i * 0.03 }}
                 onClick={() => onToggleTopic(topic.name)}
                 className={`
-                  relative p-3 sm:p-4 rounded-lg sm:rounded-xl text-left transition-all duration-200 group cursor-pointer
+                  relative p-3 sm:p-4 rounded-lg sm:rounded-xl text-left transition-all duration-200 group cursor-pointer flex flex-col
                   ${isActive 
                     ? 'glass-card glow-border scale-[1.02]' 
                     : 'glass-surface hover:bg-card/60'
@@ -33,10 +33,10 @@ export function TopicGrid({ topics, selectedTopics, onToggleTopic }: TopicGridPr
                 `}
               >
                 <div className={`absolute inset-0 rounded-lg sm:rounded-xl bg-gradient-to-br ${topic.color} opacity-50`} />
-                <div className="relative z-10">
-                  <span className="text-xl sm:text-2xl mb-1 sm:mb-2 block">{topic.icon}</span>
-                  <span className="text-xs sm:text-sm font-medium text-foreground block leading-tight line-clamp-2">{topic.name}</span>
-                  <span className="text-[10px] sm:text-xs text-muted-foreground mt-1 block">{topic.count} sessions</span>
+                <div className="relative z-10 flex flex-col h-full">
+                  <span className="text-xl sm:text-2xl mb-1 sm:mb-2 block text-center">{topic.icon}</span>
+                  <span className="text-xs sm:text-sm font-medium text-foreground block leading-tight line-clamp-2 text-center mb-auto">{topic.name}</span>
+                  <span className="text-[10px] sm:text-xs text-muted-foreground mt-1 block text-center">{topic.count} sessions</span>
                 </div>
               </motion.button>
             );

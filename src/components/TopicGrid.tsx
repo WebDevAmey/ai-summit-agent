@@ -9,12 +9,12 @@ interface TopicGridProps {
 
 export function TopicGrid({ topics, selectedTopics, onToggleTopic }: TopicGridProps) {
   return (
-    <section className="py-12">
+    <section className="py-8 sm:py-12">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 text-center">
           Explore by <span className="text-gradient">Topic</span>
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
           {topics.map((topic, i) => {
             const isActive = selectedTopics.includes(topic.name);
             return (
@@ -25,18 +25,18 @@ export function TopicGrid({ topics, selectedTopics, onToggleTopic }: TopicGridPr
                 transition={{ delay: i * 0.03 }}
                 onClick={() => onToggleTopic(topic.name)}
                 className={`
-                  relative p-4 rounded-xl text-left transition-all duration-200 group cursor-pointer
+                  relative p-3 sm:p-4 rounded-lg sm:rounded-xl text-left transition-all duration-200 group cursor-pointer
                   ${isActive 
                     ? 'glass-card glow-border scale-[1.02]' 
                     : 'glass-surface hover:bg-card/60'
                   }
                 `}
               >
-                <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${topic.color} opacity-50`} />
+                <div className={`absolute inset-0 rounded-lg sm:rounded-xl bg-gradient-to-br ${topic.color} opacity-50`} />
                 <div className="relative z-10">
-                  <span className="text-2xl mb-2 block">{topic.icon}</span>
-                  <span className="text-sm font-medium text-foreground block leading-tight">{topic.name}</span>
-                  <span className="text-xs text-muted-foreground mt-1 block">{topic.count} sessions</span>
+                  <span className="text-xl sm:text-2xl mb-1 sm:mb-2 block">{topic.icon}</span>
+                  <span className="text-xs sm:text-sm font-medium text-foreground block leading-tight line-clamp-2">{topic.name}</span>
+                  <span className="text-[10px] sm:text-xs text-muted-foreground mt-1 block">{topic.count} sessions</span>
                 </div>
               </motion.button>
             );

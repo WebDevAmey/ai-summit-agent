@@ -32,7 +32,7 @@ export function FilterBar({
     <div className="sticky top-0 z-40 glass-surface border-b border-border/30 backdrop-blur-xl py-4">
       <div className="container mx-auto px-4 space-y-3">
         {/* Search + sort row */}
-        <div className="flex gap-3 items-center">
+        <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
@@ -47,7 +47,7 @@ export function FilterBar({
           <select
             value={sort}
             onChange={e => setSort(e.target.value as any)}
-            className="px-3 py-2.5 bg-secondary/50 border border-border/50 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="px-3 py-2.5 bg-secondary/50 border border-border/50 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 sm:w-auto w-full"
             aria-label="Sort sessions"
           >
             <option value="time">By Time</option>
@@ -57,7 +57,7 @@ export function FilterBar({
         </div>
 
         {/* Filter pills row */}
-        <div className="flex gap-2 overflow-x-auto scroll-hidden items-center">
+        <div className="flex gap-2 overflow-x-auto scroll-hidden items-center pb-1 -mx-1 px-1">
           {/* Day pills */}
           {(Object.entries(DAY_LABELS) as [DayCode, string][]).map(([code, label]) => (
             <button
@@ -93,15 +93,15 @@ export function FilterBar({
         </div>
 
         {/* Active topic chips + result count */}
-        <div className="flex items-center justify-between">
-          <div className="flex gap-2 overflow-x-auto scroll-hidden">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+          <div className="flex gap-2 overflow-x-auto scroll-hidden w-full sm:w-auto pb-1 -mx-1 px-1">
             {selectedTopics.map(t => (
               <span key={t} className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-medium whitespace-nowrap">
                 {t}
               </span>
             ))}
           </div>
-          <span className="text-xs text-muted-foreground whitespace-nowrap ml-4">
+          <span className="text-xs text-muted-foreground whitespace-nowrap sm:ml-4">
             {resultCount} session{resultCount !== 1 ? 's' : ''}
           </span>
         </div>

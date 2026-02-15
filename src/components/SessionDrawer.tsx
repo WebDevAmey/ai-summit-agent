@@ -36,7 +36,7 @@ export function SessionDrawer({ session, onClose }: SessionDrawerProps) {
     <div className="fixed inset-0 z-50 flex justify-end" onClick={onClose}>
       <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
       <div
-        className="relative w-full max-w-lg bg-card border-l border-border overflow-y-auto animate-fade-in-up"
+        className="relative w-full sm:max-w-lg bg-card border-l border-border overflow-y-auto animate-fade-in-up"
         onClick={e => e.stopPropagation()}
       >
         <div className="sticky top-0 z-10 flex items-center justify-between p-4 border-b border-border bg-card/80 backdrop-blur-md">
@@ -46,7 +46,7 @@ export function SessionDrawer({ session, onClose }: SessionDrawerProps) {
           </button>
         </div>
 
-        <div className="p-6 space-y-6">
+        <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
           {/* Meta */}
           <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
             <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {session.dateLabel}</span>
@@ -55,26 +55,27 @@ export function SessionDrawer({ session, onClose }: SessionDrawerProps) {
           </div>
 
           {/* Actions */}
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={toggleSave}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 saved
                   ? 'bg-primary text-primary-foreground'
                   : 'bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground'
               }`}
             >
               {saved ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
-              {saved ? 'Saved to Agenda' : 'Add to My Agenda'}
+              <span className="hidden sm:inline">{saved ? 'Saved to Agenda' : 'Add to My Agenda'}</span>
+              <span className="sm:hidden">{saved ? 'Saved' : 'Save'}</span>
             </button>
             {session.liveUrl && (
               <a
                 href={session.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium"
+                className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium"
               >
-                <ExternalLink className="w-4 h-4" /> Watch Live
+                <ExternalLink className="w-4 h-4" /> <span className="hidden sm:inline">Watch Live</span><span className="sm:hidden">Live</span>
               </a>
             )}
           </div>

@@ -39,17 +39,17 @@ export default function AgendaPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-12">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 mb-8">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
               My <span className="text-gradient">Agenda</span>
             </h1>
-            <p className="text-muted-foreground">{sessions.length} saved session{sessions.length !== 1 ? 's' : ''}</p>
+            <p className="text-sm sm:text-base text-muted-foreground">{sessions.length} saved session{sessions.length !== 1 ? 's' : ''}</p>
           </div>
           {sessions.length > 0 && (
             <button
               onClick={handleExport}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all w-full sm:w-auto justify-center"
             >
               <Download className="w-4 h-4" /> Export
             </button>

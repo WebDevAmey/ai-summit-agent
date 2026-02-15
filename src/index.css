@@ -6,57 +6,53 @@
 
 @layer base {
   :root {
-    /* Modern dark theme - Linear-inspired gray gradients */
-    --background: 0 0% 3%;
-    --foreground: 0 0% 98%;
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
 
-    --card: 0 0% 6%;
-    --card-foreground: 0 0% 98%;
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 96%;
 
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 96%;
 
-    --primary: 0 0% 70%;
-    --primary-foreground: 0 0% 3%;
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 40% 90%;
 
-    --muted: 0 0% 8%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 222 30% 12%;
+    --muted-foreground: 215 20% 55%;
 
-    --accent: 0 0% 75%;
+    --accent: 24 95% 53%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 12%;
-    --ring: 0 0% 70%;
+    --border: 222 30% 18%;
+    --input: 222 30% 16%;
+    --ring: 24 95% 53%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 5%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 0 0% 70%;
-    --sidebar-primary-foreground: 0 0% 3%;
-    --sidebar-accent: 0 0% 10%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 0 0% 70%;
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 30% 14%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 222 30% 18%;
+    --sidebar-ring: 24 95% 53%;
 
-    /* Custom tokens - Gray gradient theme */
-    --glow-primary: 0 0% 70%;
-    --glow-accent: 0 0% 75%;
-    --surface-glass: 0 0% 8%;
-    --surface-elevated: 0 0% 11%;
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 3%) 0%, hsl(0 0% 5%) 30%, hsl(0 0% 3%) 60%, hsl(0 0% 4%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 8% / 0.9), hsl(0 0% 6% / 0.7));
-    --gradient-accent: linear-gradient(135deg, hsl(0 0% 70% / 0.15), hsl(0 0% 75% / 0.1));
-    --shadow-glow: 0 0 50px hsl(0 0% 70% / 0.1), 0 0 100px hsl(0 0% 75% / 0.05);
-    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.4), 0 0 0 1px hsl(0 0% 15% / 0.5);
-    --shadow-glow-gray: 0 0 30px hsl(0 0% 70% / 0.15);
+    /* Custom tokens */
+    --glow-primary: 24 95% 53%;
+    --surface-glass: 222 47% 10%;
+    --surface-elevated: 222 40% 12%;
+    --gradient-hero: linear-gradient(135deg, hsl(222 47% 6%) 0%, hsl(222 60% 10%) 50%, hsl(240 40% 8%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(222 47% 11% / 0.8), hsl(222 47% 7% / 0.6));
+    --shadow-glow: 0 0 40px hsl(24 95% 53% / 0.15);
+    --shadow-card: 0 4px 30px hsl(0 0% 0% / 0.3);
   }
 }
 
@@ -91,31 +87,11 @@
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(0 0% 95%), hsl(0 0% 85%), hsl(0 0% 90%));
-  }
-  
-  .text-gradient-subtle {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(0 0% 85%), hsl(0 0% 75%));
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-orange-300 to-primary;
   }
 
   .hero-gradient {
     background: var(--gradient-hero);
-    position: relative;
-  }
-  
-  .hero-gradient::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 80% 50% at 50% 0%, hsl(0 0% 70% / 0.05), transparent),
-                radial-gradient(ellipse 60% 40% at 80% 100%, hsl(0 0% 75% / 0.03), transparent);
-    pointer-events: none;
-  }
-  
-  .bg-gradient-radial {
-    background-image: radial-gradient(circle, var(--tw-gradient-stops));
   }
 
   .filter-pill {
@@ -125,7 +101,7 @@
 
   .filter-pill-active {
     @apply bg-primary text-primary-foreground shadow-lg;
-    box-shadow: var(--shadow-glow-gray);
+    box-shadow: 0 0 20px hsl(24 95% 53% / 0.3);
   }
 
   .scroll-hidden {
@@ -134,5 +110,19 @@
   }
   .scroll-hidden::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 640px) {
+    /* Better touch targets */
+    button, a {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Smooth scrolling */
+    * {
+      -webkit-overflow-scrolling: touch;
+    }
   }
 }

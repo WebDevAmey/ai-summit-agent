@@ -48,14 +48,14 @@ export default function SpeakersPage() {
 
         {selectedSpeaker && (
           <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold font-sans text-foreground">
-                Sessions with <span className="text-primary">{selectedSpeaker}</span>
-              </h2>
-              <button onClick={() => setSelectedSpeaker(null)} className="text-xs text-primary hover:underline">
-                Show all speakers
-              </button>
-            </div>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mb-4">
+          <h2 className="text-base sm:text-lg font-semibold font-sans text-foreground">
+            Sessions with <span className="text-primary break-words">{selectedSpeaker}</span>
+          </h2>
+          <button onClick={() => setSelectedSpeaker(null)} className="text-xs text-primary hover:underline whitespace-nowrap">
+            Show all speakers
+          </button>
+        </div>
             <div className="grid gap-4 md:grid-cols-2">
               {speakerSessions.map(s => (
                 <SessionCard key={s.id} session={s} onOpenDetail={setDetailSession} />

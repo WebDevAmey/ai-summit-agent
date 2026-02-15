@@ -32,8 +32,8 @@ export function SessionCard({ session, onOpenDetail, onAgendaChange }: SessionCa
       className="glass-card p-5 hover:border-primary/30 transition-all duration-200 cursor-pointer group"
       onClick={() => onOpenDetail(session)}
     >
-      <div className="flex justify-between items-start gap-3 mb-3">
-        <h3 className="text-base font-semibold text-foreground leading-tight group-hover:text-primary transition-colors font-sans">
+      <div className="flex justify-between items-start gap-2 sm:gap-3 mb-3">
+        <h3 className="text-sm sm:text-base font-semibold text-foreground leading-tight group-hover:text-primary transition-colors font-sans flex-1 min-w-0">
           {session.title}
         </h3>
         <button
@@ -49,7 +49,7 @@ export function SessionCard({ session, onOpenDetail, onAgendaChange }: SessionCa
         </button>
       </div>
 
-      <div className="flex flex-wrap gap-3 text-xs text-muted-foreground mb-3">
+      <div className="flex flex-wrap gap-2 sm:gap-3 text-xs text-muted-foreground mb-3">
         <span className="flex items-center gap-1">
           <Calendar className="w-3 h-3" /> {session.dateLabel}
         </span>
@@ -62,13 +62,13 @@ export function SessionCard({ session, onOpenDetail, onAgendaChange }: SessionCa
       </div>
 
       {session.speakers.length > 0 && (
-        <div className="flex items-center gap-1 text-xs text-muted-foreground mb-3">
+        <div className="flex items-center gap-1 text-xs text-muted-foreground mb-3 min-w-0">
           <Users className="w-3 h-3 flex-shrink-0" />
           <span className="truncate">{session.speakers.join(', ')}</span>
         </div>
       )}
 
-      <p className="text-xs text-muted-foreground/80 line-clamp-2 mb-3">{session.description}</p>
+      <p className="text-xs text-muted-foreground/80 line-clamp-2 mb-3 break-words">{session.description}</p>
 
       <div className="flex flex-wrap gap-1.5">
         {session.topics.map(t => (

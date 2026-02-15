@@ -55,8 +55,8 @@ const Index = () => {
         resultCount={results.length}
       />
 
-      <section className="container mx-auto px-4 py-8">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <section className="container mx-auto px-4 py-6 sm:py-8">
+        <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {results.map(session => (
             <SessionCard
               key={session.id}

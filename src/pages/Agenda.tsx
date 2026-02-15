@@ -39,8 +39,8 @@ export default function AgendaPage() {
   return (
     <div className="min-h-screen relative" style={{ zIndex: 1, background: 'transparent' }}>
       <div className="container mx-auto px-4 py-6 sm:py-12">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
-          <div className="flex-1 min-w-0">
+        <div className="flex flex-col gap-4 mb-6 sm:mb-8">
+          <div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
               My <span className="text-gradient">Agenda</span>
             </h1>
@@ -49,9 +49,9 @@ export default function AgendaPage() {
           {sessions.length > 0 && (
             <button
               onClick={handleExport}
-              className="flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all active:scale-95 touch-manipulation w-full sm:w-auto flex-shrink-0"
+              className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all active:scale-95 touch-manipulation w-full sm:w-auto sm:self-start"
             >
-              <Download className="w-4 h-4 flex-shrink-0" /> <span>Export</span>
+              <Download className="w-4 h-4 flex-shrink-0" /> <span>Export Agenda</span>
             </button>
           )}
         </div>

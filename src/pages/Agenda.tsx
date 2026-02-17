@@ -1,24 +1,41 @@
-import { useState, useCallback } from 'react';
-import { getSavedSessions, removeSessionId, exportAgendaAsText } from '@/lib/agenda';
-import { SessionCard } from '@/components/SessionCard';
-import { SessionDrawer } from '@/components/SessionDrawer';
-import { Session, DAY_LABELS, DayCode } from '@/lib/types';
-import { Download, Trash2, CalendarDays } from 'lucide-react';
+import { useState, useCallback, useMemo } from "react";
+import { getSavedSessions, removeSessionId, exportAgendaAsText } from "@/lib/agenda";
+import { SessionCard } from "@/components/SessionCard";
+import { SessionDrawer } from "@/components/SessionDrawer";
+import { Session, DAY_LABELS, DayCode } from "@/lib/types";
+import { Download, Trash2, CalendarDays } from "lucide-react";
+import { parseTimeToMinutes } from "@/lib/utils";
 
 export default function AgendaPage() {
   const [tick, setTick] = useState(0);
   const [detailSession, setDetailSession] = useState<Session | null>(null);
 
-  const sessions = getSavedSessions();
-  const refresh = useCallback(() => setTick(t => t + 1), []);
+  const sessions = useMemo(() => getSavedSessions(), [tick]);
+  const refresh = useCallback(() => setTick((t) => t + 1), []);
 
-  // Group by day
-  const grouped = new Map<DayCode, Session[]>();
-  sessions.forEach(s => {
-    const arr = grouped.get(s.dayCode) || [];
-    arr.push(s);
-    grouped.set(s.dayCode, arr);
-  });
+  // Group by day and sort sessions within each day by parsed start time
+  const grouped = useMemo(() => {
+    const byDay = new Map<DayCode, Session[]>();
+    sessions.forEach((s) => {
+      const arr = byDay.get(s.dayCode) || [];
+      arr.push(s);
+      byDay.set(s.dayCode, arr);
+    });
+
+    byDay.forEach((list, key) => {
+      byDay.set(
+        key,
+        [...list].sort((a, b) => {
+          const aMinutes = parseTimeToMinutes(a.startTime);
+          const bMinutes = parseTimeToMinutes(b.startTime);
+          if (aMinutes !== bMinutes) return aMinutes - bMinutes;
+          return a.title.localeCompare(b.title);
+        })
+      );
+    });
+
+    return byDay;
+  }, [sessions]);
 
   const handleExport = () => {
     const text = exportAgendaAsText();
@@ -37,14 +54,16 @@ export default function AgendaPage() {
   };
 
   return (
-    <div className="min-h-screen relative" style={{ zIndex: 1, background: 'transparent' }}>
+    <div className="min-h-screen relative z-[1] bg-transparent">
       <div className="container mx-auto px-4 py-6 sm:py-12">
         <div className="flex flex-col gap-4 mb-6 sm:mb-8">
           <div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
               My <span className="text-gradient">Agenda</span>
             </h1>
-            <p className="text-sm sm:text-base text-muted-foreground">{sessions.length} saved session{sessions.length !== 1 ? 's' : ''}</p>
+            <p className="text-sm sm:text-base text-muted-foreground">
+              {sessions.length} saved session{sessions.length !== 1 ? "s" : ""}
+            </p>
           </div>
           {sessions.length > 0 && (
             <button
@@ -67,7 +86,6 @@ export default function AgendaPage() {
             {(Object.entries(DAY_LABELS) as [DayCode, string][]).map(([code, label]) => {
               const daySessions = grouped.get(code);
               if (!daySessions?.length) return null;
-              daySessions.sort((a, b) => a.startTime.localeCompare(b.startTime));
               return (
                 <div key={code}>
                   <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2 font-sans">
@@ -75,13 +93,9 @@ export default function AgendaPage() {
                     {label}
                   </h2>
                   <div className="grid gap-4 md:grid-cols-2">
-                    {daySessions.map(session => (
+                    {daySessions.map((session) => (
                       <div key={session.id} className="relative">
-                        <SessionCard
-                          session={session}
-                          onOpenDetail={setDetailSession}
-                          onAgendaChange={refresh}
-                        />
+                        <SessionCard session={session} onOpenDetail={setDetailSession} onAgendaChange={refresh} />
                         <button
                           onClick={(e) => {
                             e.stopPropagation();

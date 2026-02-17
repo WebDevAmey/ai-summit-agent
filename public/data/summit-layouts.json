@@ -1,0 +1,50 @@
+[
+  {
+    "id": "hall-1-gf",
+    "title": "Hall 1 Ground Floor",
+    "type": "image",
+    "thumbnailUrl": "/layouts/1.jpeg",
+    "fileUrl": "/layouts/1.jpeg",
+    "zones": ["Main Stage", "Startup Booths", "Food Court", "Registration"]
+  },
+  {
+    "id": "hall-14-gf",
+    "title": "Hall 14 Ground Floor",
+    "type": "image",
+    "thumbnailUrl": "/layouts/2.jpeg",
+    "fileUrl": "/layouts/2.jpeg",
+    "zones": ["Networking Lounge", "Startup Booths", "Country Pavilions"]
+  },
+  {
+    "id": "hall-6-gf",
+    "title": "Hall 6 Ground Floor",
+    "type": "image",
+    "thumbnailUrl": "/layouts/3.jpeg",
+    "fileUrl": "/layouts/3.jpeg",
+    "zones": ["Workshop Zone", "Startup Pods", "Networking Lounge"]
+  },
+  {
+    "id": "halls-2-5-gf",
+    "title": "Halls 2,3,4,5 Ground Floor",
+    "type": "image",
+    "thumbnailUrl": "/layouts/4.jpeg",
+    "fileUrl": "/layouts/4.jpeg",
+    "zones": ["Startup Booths", "Food Court", "Registration"]
+  },
+  {
+    "id": "halls-2-5-ff",
+    "title": "Halls 2,3,4,5 First Floor",
+    "type": "image",
+    "thumbnailUrl": "/layouts/5.jpeg",
+    "fileUrl": "/layouts/5.jpeg",
+    "zones": ["Workshop Zone", "VIP Dining", "Networking Lounge"]
+  },
+  {
+    "id": "campus-map",
+    "title": "Bharat Mandapam Campus Map",
+    "type": "image",
+    "thumbnailUrl": "/layouts/6.jpeg",
+    "fileUrl": "/layouts/6.jpeg",
+    "zones": ["Main Stage", "Food Court", "Registration", "Gates"]
+  }
+]

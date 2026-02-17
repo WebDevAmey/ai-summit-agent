@@ -1,0 +1,10 @@
+// This file exists to ensure the layouts directory is created.
+// Place the summit layout JPEG files in this folder with the names referenced in public/data/summit-layouts.json:
+// - hall-1-ground-floor.jpg
+// - hall-6-ground-floor.jpg
+// - hall-14-ground-floor.jpg
+// - halls-2-3-4-5-ground-floor.jpg
+// - halls-2-3-4-5-first-floor.jpg
+// - campus-map.jpg
+
+

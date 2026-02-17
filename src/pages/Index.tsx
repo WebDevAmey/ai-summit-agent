@@ -1,31 +1,31 @@
-import { useState, useMemo, useCallback } from 'react';
-import { Hero } from '@/components/Hero';
-import { TopicGrid } from '@/components/TopicGrid';
-import { FilterBar } from '@/components/FilterBar';
-import { SessionCard } from '@/components/SessionCard';
-import { SessionDrawer } from '@/components/SessionDrawer';
-import { searchSessions, getTopicStats } from '@/lib/search';
-import { Session } from '@/lib/types';
+import { lazy, Suspense, useState, useMemo, useCallback } from "react";
+import { Hero } from "@/components/Hero";
+import { TopicGrid } from "@/components/TopicGrid";
+import { FilterBar } from "@/components/FilterBar";
+import { SessionCard } from "@/components/SessionCard";
+import { SessionDrawer } from "@/components/SessionDrawer";
+import { searchSessions, getTopicStats } from "@/lib/search";
+import { Session } from "@/lib/types";
+
+const SummitLayoutsSection = lazy(() => import('@/components/SummitLayoutsSection'));
 
 const Index = () => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
-  const [sort, setSort] = useState<'time' | 'title' | 'topics'>('time');
+  const [sort, setSort] = useState<"time" | "title" | "topics">("time");
   const [detailSession, setDetailSession] = useState<Session | null>(null);
   const [, setAgendaTick] = useState(0);
 
   const topicStats = useMemo(() => getTopicStats(), []);
 
   const toggleTopic = useCallback((topic: string) => {
-    setSelectedTopics(prev =>
-      prev.includes(topic) ? prev.filter(t => t !== topic) : [...prev, topic]
-    );
+    setSelectedTopics((prev) => (prev.includes(topic) ? prev.filter((t) => t !== topic) : [...prev, topic]));
   }, []);
 
   const clearAll = useCallback(() => {
-    setQuery('');
+    setQuery("");
     setSelectedDay(null);
     setSelectedTimeSlot(null);
     setSelectedTopics([]);
@@ -37,9 +37,18 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen relative" style={{ zIndex: 1, background: 'transparent' }}>
+    <div className="min-h-screen relative z-[1] bg-transparent">
       <Hero />
       <TopicGrid topics={topicStats} selectedTopics={selectedTopics} onToggleTopic={toggleTopic} />
+      <Suspense
+        fallback={
+          <section className="container mx-auto px-4 py-6 sm:py-8">
+            <div className="glass-card p-6 text-center text-muted-foreground">Loading venue layouts...</div>
+          </section>
+        }
+      >
+        <SummitLayoutsSection />
+      </Suspense>
       
       <FilterBar
         query={query}

@@ -1,6 +1,7 @@
-import { Session, TopicInfo, ALL_TOPICS, TopicName } from './types';
-import { dedupedSessions } from '@/data/sessions';
-import { speakers } from '@/data/speakers';
+import { Session, TopicInfo, ALL_TOPICS, TopicName } from "./types";
+import { dedupedSessions } from "@/data/sessions";
+import { speakers } from "@/data/speakers";
+import { parseTimeToMinutes } from "./utils";
 
 // Precomputed search index
 interface SearchEntry {
@@ -28,34 +29,41 @@ export function searchSessions(
     timeSlot?: string | null;
     speaker?: string | null;
   },
-  sort: 'time' | 'title' | 'topics' = 'time'
+  sort: "time" | "title" | "topics" = "time"
 ): Session[] {
   const q = query.toLowerCase().trim();
 
   let results = searchIndex
-    .filter(entry => {
+    .filter((entry) => {
       if (q && !entry.searchText.includes(q)) return false;
       if (filters.day && entry.session.dayCode !== filters.day) return false;
       if (filters.timeSlot && entry.session.timeSlot !== filters.timeSlot) return false;
-      if (filters.topics?.length && !filters.topics.some(t => entry.session.topics.includes(t))) return false;
+      if (filters.topics?.length && !filters.topics.some((t) => entry.session.topics.includes(t))) return false;
       if (filters.speaker && !entry.session.speakers.includes(filters.speaker)) return false;
       return true;
     })
-    .map(e => e.session);
+    .map((e) => e.session);
 
   switch (sort) {
-    case 'time':
-      results.sort((a, b) => {
+    case "time": {
+      // Stable, time-aware sort: first by calendar day, then by parsed start time, then by title.
+      results = [...results].sort((a, b) => {
         const dateComp = a.dateISO.localeCompare(b.dateISO);
         if (dateComp !== 0) return dateComp;
-        return a.startTime.localeCompare(b.startTime);
+
+        const aMinutes = parseTimeToMinutes(a.startTime);
+        const bMinutes = parseTimeToMinutes(b.startTime);
+        if (aMinutes !== bMinutes) return aMinutes - bMinutes;
+
+        return a.title.localeCompare(b.title);
       });
       break;
-    case 'title':
-      results.sort((a, b) => a.title.localeCompare(b.title));
+    }
+    case "title":
+      results = [...results].sort((a, b) => a.title.localeCompare(b.title));
       break;
-    case 'topics':
-      results.sort((a, b) => b.topics.length - a.topics.length);
+    case "topics":
+      results = [...results].sort((a, b) => b.topics.length - a.topics.length);
       break;
   }
 

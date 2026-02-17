@@ -1,0 +1,244 @@
+[
+  {
+    "id": "bento-box-bento",
+    "name": "Bento Box at Bento",
+    "area": "Multiple locations (Delhi NCR)",
+    "famousFor": "Bento box platters",
+    "shortDescription": "Compact Japanese-style bento boxes for fuss-free, portioned weekday meals.",
+    "category": "Food"
+  },
+  {
+    "id": "ama-cafe-majnu",
+    "name": "AMA Cafe",
+    "area": "Majnu ka Tila",
+    "famousFor": "Pancakes & breakfast platters",
+    "shortDescription": "Tibetan-side cafe loved for tall pancakes and slow weekend breakfasts.",
+    "category": "Cafe"
+  },
+  {
+    "id": "thakali-kitchen",
+    "name": "Thakali Kitchen",
+    "area": "Majnu ka Tila",
+    "famousFor": "Nepali thali",
+    "shortDescription": "Homestyle Nepali thalis with comforting dal, pickles, and ghee-brushed bread.",
+    "category": "Food"
+  },
+  {
+    "id": "wongdhen-cafe",
+    "name": "Wongdhen Cafe",
+    "area": "Majnu ka Tila",
+    "famousFor": "Mango sando & cheesecake",
+    "shortDescription": "Pastel-toned cafe pairing playful desserts with views over the colony lanes.",
+    "category": "Cafe"
+  },
+  {
+    "id": "aunty-dolma",
+    "name": "Aunty Dolma",
+    "area": "Majnu ka Tila",
+    "famousFor": "Tibetan momos",
+    "shortDescription": "No-frills momo counter where plates of steaming dumplings never really stop.",
+    "category": "Food"
+  },
+  {
+    "id": "wongdhen-gelato",
+    "name": "Wongdhen Gelato",
+    "area": "Majnu ka Tila",
+    "famousFor": "Artisanal gelato",
+    "shortDescription": "Small gelato shop rotating flavours that skew playful but not overly sweet.",
+    "category": "Cafe"
+  },
+  {
+    "id": "daisy-mae-cantina",
+    "name": "Daisy Mae Cantina",
+    "area": "Greater Kailash",
+    "famousFor": "Tex-Mex tacos",
+    "shortDescription": "Colourful cantina-style spot turning out loaded tacos and shared Tex-Mex plates.",
+    "category": "Food"
+  },
+  {
+    "id": "azams-mughlai",
+    "name": "Azam’s Mughlai",
+    "area": "Humayunpur, Safdarjung",
+    "famousFor": "Kakori kebab",
+    "shortDescription": "Soft, melt-in-mouth kakori kebabs served with just enough room for seconds.",
+    "category": "Food"
+  },
+  {
+    "id": "chichetti",
+    "name": "Chichetti",
+    "area": "Greater Kailash",
+    "famousFor": "Vodka pasta",
+    "shortDescription": "Neighbourhood Italian joint where the creamy vodka pasta has regulars.",
+    "category": "Food"
+  },
+  {
+    "id": "klap",
+    "name": "KLAP",
+    "area": "Khan Market",
+    "famousFor": "Dimsums & Asian small plates",
+    "shortDescription": "Polished Asian bar-kitchen focusing on shareable dimsum and small plates.",
+    "category": "Food"
+  },
+  {
+    "id": "khan-chacha",
+    "name": "Khan Chacha",
+    "area": "Khan Market & outlets",
+    "famousFor": "Rolls & kebabs",
+    "shortDescription": "Old-school kebab and roll brand many Delhiites default to after market runs.",
+    "category": "Food"
+  },
+  {
+    "id": "big-chill-cakery",
+    "name": "Big Chill Cakery",
+    "area": "Khan Market & Select Citywalk",
+    "famousFor": "Cheesecakes",
+    "shortDescription": "Dessert offshoot famed for dense cheesecakes and nostalgia-layered bakes.",
+    "category": "Cafe"
+  },
+  {
+    "id": "delish-mama-gelato",
+    "name": "Delish Mama Gelato & Caffe",
+    "area": "South Delhi",
+    "famousFor": "Fresh gelato",
+    "shortDescription": "Neighbourhood gelato bar serving fresh churns in focused, changing flavours.",
+    "category": "Cafe"
+  },
+  {
+    "id": "dosa-coffee-cp",
+    "name": "Dosa Coffee",
+    "area": "Connaught Place",
+    "famousFor": "South Indian dosa",
+    "shortDescription": "Quick-serve dosa and filter coffee stop ideal between meetings in CP.",
+    "category": "Food"
+  },
+  {
+    "id": "ek-andaz",
+    "name": "Ek Andaz",
+    "area": "South Delhi",
+    "famousFor": "Detroit-style cheesecake",
+    "shortDescription": "Small dessert-led space whose Detroit-style cheesecake regularly sells out.",
+    "category": "Cafe"
+  },
+  {
+    "id": "bomba",
+    "name": "Bomba",
+    "area": "Gurugram / Delhi NCR",
+    "famousFor": "Italian pizzas",
+    "shortDescription": "Lively pizzeria turning out chewy, well-charred pies built for sharing.",
+    "category": "Food"
+  },
+  {
+    "id": "ichiban",
+    "name": "Ichiban",
+    "area": "Pandara Road",
+    "famousFor": "Sushi & Japanese platters",
+    "shortDescription": "Longtime spot for approachable sushi and mixed Japanese sharing platters.",
+    "category": "Food"
+  },
+  {
+    "id": "alkauser",
+    "name": "Alkauser",
+    "area": "Chanakyapuri & outlets",
+    "famousFor": "Seekh kebabs",
+    "shortDescription": "Late-evening seekh kebabs and warqi parathas passed through car windows.",
+    "category": "Food"
+  },
+  {
+    "id": "breadtalk",
+    "name": "BreadTalk",
+    "area": "Select Citywalk & malls",
+    "famousFor": "Fresh Asian breads",
+    "shortDescription": "Bakery chain with soft Asian-style breads and savoury stuffed buns.",
+    "category": "Food"
+  },
+  {
+    "id": "wengers-cp",
+    "name": "Wenger’s",
+    "area": "Connaught Place",
+    "famousFor": "Pattice & pastries",
+    "shortDescription": "CP institution for buttery patties, pastries, and quick stand-up snacking.",
+    "category": "Cafe"
+  },
+  {
+    "id": "kake-da-hotel",
+    "name": "Kake Da Hotel",
+    "area": "Connaught Place",
+    "famousFor": "Butter chicken",
+    "shortDescription": "Always-busy dhaba-style dining room where gravy boats rarely run empty.",
+    "category": "Food"
+  },
+  {
+    "id": "embassy-cp",
+    "name": "The Embassy",
+    "area": "Connaught Place",
+    "famousFor": "Classic North Indian dishes",
+    "shortDescription": "Old-world CP restaurant known for hearty North Indian and continental plates.",
+    "category": "Food"
+  },
+  {
+    "id": "rose-cafe-saket",
+    "name": "Rose Cafe",
+    "area": "Saket",
+    "famousFor": "Pink-themed brunch & desserts",
+    "shortDescription": "Pastel cafe for relaxed brunches, afternoon cakes, and conversation-heavy hours.",
+    "category": "Cafe"
+  },
+  {
+    "id": "lama-kitchen",
+    "name": "Lama Kitchen",
+    "area": "Hauz Khas Village",
+    "famousFor": "Tibetan cuisine",
+    "shortDescription": "Compact HKV spot serving momos, thukpa, and homely Tibetan mains.",
+    "category": "Food"
+  },
+  {
+    "id": "mia-bella",
+    "name": "Mia Bella",
+    "area": "Hauz Khas Village",
+    "famousFor": "Pasta & rooftop vibe",
+    "shortDescription": "Lake-facing terrace restaurant pairing pastas with one of HKV’s better views.",
+    "category": "Cafe"
+  },
+  {
+    "id": "naivedyam",
+    "name": "Naivedyam",
+    "area": "Hauz Khas & outlets",
+    "famousFor": "Dosa & chutney",
+    "shortDescription": "South Indian veg restaurant famous for crisp dosas and generous chutney refills.",
+    "category": "Food"
+  },
+  {
+    "id": "tea-room-hkv",
+    "name": "The Tea Room",
+    "area": "Hauz Khas Village",
+    "famousFor": "Basque cheesecake",
+    "shortDescription": "Calm tea-focused cafe where Basque cheesecake often gets its own orders.",
+    "category": "Cafe"
+  },
+  {
+    "id": "rajinder-da-dhaba",
+    "name": "Rajinder Da Dhaba",
+    "area": "Safdarjung Enclave",
+    "famousFor": "North Indian kebabs",
+    "shortDescription": "Huge roadside favourite for tandoori meats, rolls, and car-boot dinners.",
+    "category": "Food"
+  },
+  {
+    "id": "karims-jama",
+    "name": "Karim’s",
+    "area": "Jama Masjid, Old Delhi",
+    "famousFor": "Mughlai kebabs",
+    "shortDescription": "Iconic Mughlai stop where smoky kebabs and gravies overshadow the decor.",
+    "category": "Food"
+  },
+  {
+    "id": "moolchand-paratha",
+    "name": "Moolchand Paratha",
+    "area": "Lajpat Nagar / Moolchand",
+    "famousFor": "Stuffed parathas",
+    "shortDescription": "Late-night paratha stop known for heavily stuffed, griddle-crisp flatbreads.",
+    "category": "Food"
+  }
+]
+
+
